@@ -11,6 +11,12 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        backgroundImage: {
+          'hero': "url('../public/heroBgImage.jpg')",
+        },
+        emerald: {
+          '900' : '#003835'
+        } 
       },
     },
   },
