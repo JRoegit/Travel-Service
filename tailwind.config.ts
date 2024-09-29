@@ -16,6 +16,9 @@ const config: Config = {
         },
         emerald: {
           '900' : '#003835'
+        },
+        zinc: {
+          '800' : '#070707'
         } 
       },
     },
