@@ -18,9 +18,9 @@ export default function Footer() {
 
 function FooterTop(){
     return (
-        <div className="flex flex-col text-white max-w-screen-xl p-4 mx-auto gap-4">
+        <div className="flex flex-col text-white max-w-screen-xl sm:mx-auto p-4 gap-4">
             <HomeButton></HomeButton>
-            <div className="flex flex-col sm:flex-row mx-auto sm:mx-0 gap-8 md:gap-0">
+            <div className="flex flex-col sm:flex-row sm:mx-0 gap-8 md:gap-0">
                     <div className="flex flex-col flex-auto sm:w-1/3 gap-2 text-sm">
                             <div className="font-bold text-lg">Company</div>
                             <Link href="/">About Flightify</Link>
