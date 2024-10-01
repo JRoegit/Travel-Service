@@ -1,4 +1,4 @@
-import JoinSkyMilesButton from './joinSkyMilesButton'
+import JoinSkyMilesButton from '../joinSkyMilesButton'
 import LoyaltyPromoImg from '/public/loyaltyPromoImage.jpg'
 import Image from 'next/image'
 
@@ -7,7 +7,7 @@ export default function LoyaltyPromo(){
     return (
         <div className='bg-gray-100 text-neutral-900'>
             <div className="flex flex-col max-w-screen-xl mx-auto p-4 gap-4">
-                <div className="text-4xl font-bold ">
+                <div className="text-2xl font-bold ">
                     Turn Miles into Memories
                 </div>
                 <div className="flex flex-col sm:flex-row bg-white rounded-md w-full"> 
@@ -22,7 +22,7 @@ export default function LoyaltyPromo(){
                         <div className='text-2xl font-medium'>
                             Join SkyMiles today and enjoy 50,000 Points on the house.
                         </div>
-                        <div className='flex flex-row w-full'>
+                        <div className='flex flex-row w-fullp pt-4'>
                             <div className='flex flex-col text-xs mr-auto'>
                                 <div>Terms and Conditions apply.</div>
                                 <div>Limited time offer.</div>

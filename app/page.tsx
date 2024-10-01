@@ -1,8 +1,7 @@
 import FlightSearch from "./Components/flightSearch";
-import Footer from "./Components/footer";
-import Hero from "./Components/hero";
-import LoyaltyPromo from "./Components/loyaltyPromo";
-import NavBar from "./Components/navbar";
+import Hero from "./Components/LandingPage/hero";
+import LoyaltyPromo from "./Components/LandingPage/loyaltyPromo";
+import UserReviews from "./Components/LandingPage/userReviews";
 
 export default function Home() {
   return (
@@ -11,8 +10,8 @@ export default function Home() {
       <div className="max-w-screen-xl mx-auto p-4">
         <FlightSearch></FlightSearch>
       </div>
+      <UserReviews></UserReviews>
       <LoyaltyPromo></LoyaltyPromo>
-      <Footer></Footer>
     </>
   );
 }
