@@ -10,9 +10,9 @@ export default function LoyaltyPromo(){
                 <div className="text-2xl font-bold ">
                     Turn Miles into Memories
                 </div>
-                <div className="flex flex-col sm:flex-row bg-white rounded-md w-full"> 
+                <div className="flex flex-col md:flex-row bg-white rounded-md w-full"> 
                     <div className='p-2'>
-                        <Image src={LoyaltyPromoImg} alt='Scenic Mountain view over bodfy of water' width={500} height={300} unoptimized className='rounded-md'></Image>
+                        <Image src={LoyaltyPromoImg} alt='Scenic Mountain view over bodfy of water' width={500} height={300} unoptimized className='rounded-md h-full w-full'></Image>
                     </div>
                     <div className='flex flex-col my-auto w-full p-2'>
                         <WelcomeOffer></WelcomeOffer>
@@ -22,8 +22,8 @@ export default function LoyaltyPromo(){
                         <div className='text-2xl font-medium'>
                             Join SkyMiles today and enjoy 50,000 Points on the house.
                         </div>
-                        <div className='flex flex-row w-fullp pt-4'>
-                            <div className='flex flex-col text-xs mr-auto'>
+                        <div className='flex flex-col-reverse md:flex-row w-fullp pt-4'>
+                            <div className='flex flex-row md:flex-col gap-1 text-xs mr-auto'>
                                 <div>Terms and Conditions apply.</div>
                                 <div>Limited time offer.</div>
                             </div>
