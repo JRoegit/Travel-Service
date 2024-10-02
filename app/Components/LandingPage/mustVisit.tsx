@@ -3,6 +3,7 @@ import Bali from '/public/bali.jpg'
 import Paris from '/public/paris.jpg'
 import Tokyo from '/public/tokyo.jpg'
 import Rome from '/public/rome.jpg'
+import Link from "next/link"
 
 
 const destinations = [
@@ -56,7 +57,7 @@ function DestinationCard({destination} : {destination : any}){
             <div className="text-lg text-gray-600">{destination.slogan}</div>
             <Image src={destination.img} alt={destination.name} width={250.0} height={250.0} layout="responsive" unoptimized className="rounded-sm w-[250px] h-[250px]"></Image>
             <div className="text-lg font-semibold">Starting from {destination.price}</div>
-            <div>BUTTON</div>
+            <Link href="/" className="text-center bg-emerald-900 hover:bg-emerald-950 text-white font-semibold rounded-md p-2">Book Now</Link>
         </div>
     )
 }
