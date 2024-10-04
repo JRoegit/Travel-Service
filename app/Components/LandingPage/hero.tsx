@@ -6,49 +6,98 @@ import { useState } from 'react';
 const tripTypes = [
     {
         "label" : "Round-Trip",
-        "value" : "roundtrip"
+        "value" : "round"
+    },
+    {
+        "label" : "Direct",
+        "value" : "direct"
     }
 ]
 
-const travelers = [
-    1,2,3,4,5,6,7,8,9
+const travelerNums = [
+    {
+        "label" : "1",
+        "value" : "1"
+    },
+    {
+        "label" : "2",
+        "value" : "2"
+    },
+    {
+        "label" : "3",
+        "value" : "3"
+    },
+    {
+        "label" : "4",
+        "value" : "4"
+    },
+    {
+        "label" : "5",
+        "value" : "5"
+    },
+    {
+        "label" : "6",
+        "value" : "6"
+    },
+    {
+        "label" : "7",
+        "value" : "7"
+    },
+    {
+        "label" : "8",
+        "value" : "8"
+    },
+    {
+        "label" : "9",
+        "value" : "9"
+    },
+]
+
+const flightClasses = [
+    {
+        "label" : "Economy",
+        "value" : "econo"
+    },
+    {
+        "label" : "Business",
+        "value" : "busin"
+    },
+    {
+        "label" : "First Class",
+        "value" : "first"
+    }
 ]
 
 export default function Hero(){
-    
+    const handleForm = (data : any) => {
+        console.log(data)
+    }
     return (
         <div className='bg-hero bg-no-repeat bg-cover text-neutral-900 h-96'>
             <div className="flex flex-col max-w-screen-xl mx-auto p-4 gap-4">
                 <div className="text-2xl font-bold text-white ">
                     Countless Flights. Once Search.
                 </div>
-                <form className="flex flex-col sm:flex-row mx-auto w-3/4 max-w-lg- ">
+                <form action="/search" method='GET' className="flex flex-col sm:flex-row mx-auto w-3/4 max-w-lg- ">
                     <div className='flex flex-row gap-2'>
-                        <TripTypeDropDown></TripTypeDropDown>
+                        <FlightSearchDropDown name="type" objects={tripTypes}/>
+                        <FlightSearchDropDown name="travelers" objects={travelerNums}/>
+                        <FlightSearchDropDown name="class" objects={flightClasses}/>
                     </div>
                     <div>
                     </div>
+                    <button type='submit'>Submit</button>
                 </form>
             </div>
         </div>
     )
 }
 
-function TripTypeDropDown(){
-    let [tripType, setTripType] = useState()
+function FlightSearchDropDown({name, objects}:{name : string, objects : any[]}){
     return (
-        <Dropdown value={tripType} onChange={(e) => setTripType(e.value)} options={tripTypes} optionLabel="label" placeholder="Select a Trip Type" className="w-full md:w-14rem bg-gray-200 p-2 rounded-md" />
+        <select name={name}>
+            {objects.map((object, index) => index == 0 ? <option selected value={object.value}>{object.label}</option> : <option value={object.value}>{object.label}</option>)}
+        </select>
     )
 }
-function NumTravelersDropDown(){
-    let [travelers, setTravelers] = useState()
-    return (
-        <Dropdown value={travelers} onChange={(e) => setTravelers(e.value)} options={tripTypes} optionLabel="label" placeholder="Select a Trip Type" className="w-full md:w-14rem bg-gray-200 p-2 rounded-md" />
-    )
-}
-function FlightClassDropDown(){
-    let [tripType, setTripType] = useState()
-    return (
-        <Dropdown value={tripType} onChange={(e) => setTripType(e.value)} options={tripTypes} optionLabel="label" placeholder="Select a Trip Type" className="w-full md:w-14rem bg-gray-200 p-2 rounded-md" />
-    )
-}
+
