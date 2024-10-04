@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "airport-codes": "^1.0.2",
     "next": "14.2.13",
     "primereact": "^10.8.3",
     "react": "^18",
