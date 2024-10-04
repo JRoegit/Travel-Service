@@ -1,7 +1,9 @@
 'use client'
 
-import { Dropdown } from 'primereact/dropdown';
-import { useState } from 'react';
+import airportData from '@/public/filtered_airports.json'
+
+import Select from 'react-select'
+import React, { useEffect, useState } from 'react';
 
 import { MdDiscount } from "react-icons/md";
 import { FaCalendarAlt } from "react-icons/fa";
@@ -147,14 +149,43 @@ function ToAndFromSelector(){
             <div className='flex flex-col w-full border-2 border-gray-200 rounded-md'>
                 <div className='flex flex-row'>
                     <BiSolidPlaneTakeOff className='size-8 text-emerald-900'/>
+                    <SearchableDropdown name="depLoc" placeholder='Departing From'></SearchableDropdown>
                 </div>
             </div>
             <button type='button' className='my-auto'>
                 <RiSwapBoxFill className='size-12 text-emerald-900'/>
             </button>
-            <div className='flex flex-col w-full  border-2 border-gray-200'>
-                Right Side
+            <div className='flex flex-col w-full border-2 border-gray-200 rounded-md'>
+                <div className='flex flex-row'>
+                    <BiSolidPlaneLand className='size-8 text-emerald-900'/>
+                    <SearchableDropdown name="arrLoc" placeholder='Arriving In'></SearchableDropdown>
+                </div>
             </div>
         </div>
+    )
+}
+
+
+const options = [
+    { value: 'balls', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
+function SearchableDropdown({name, placeholder} : {name : string, placeholder : string}){
+    let [input, setInput] = useState('')
+    
+    let filtered : {}[] = []
+    if(input.length >= 2){
+        filtered = airportData.filter((airport) => 
+            airport.label.toLowerCase().startsWith(input.toLowerCase()) || airport.value.toLowerCase().startsWith(input.toLowerCase()) ||
+            airport.label.toLowerCase().includes(input.toLowerCase()) || airport.value.toLowerCase().includes(input.toLowerCase())
+        )
+        console.log("Input is greater than or equal to two chars.")
+        console.log(filtered)
+    }
+
+    return (
+        <Select options={filtered} name={name} noOptionsMessage={() => "No Results"} onInputChange={(e) => setInput(e)} placeholder={placeholder} className='w-full'></Select>
     )
 }
