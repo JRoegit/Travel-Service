@@ -3,7 +3,7 @@
 import airportData from '@/public/filtered_airports.json'
 
 import Select from 'react-select'
-import React, { useEffect, useState } from 'react';
+import React, { FormEventHandler, useEffect, useState } from 'react';
 
 import { MdDiscount } from "react-icons/md";
 import { FaCalendarAlt } from "react-icons/fa";
@@ -79,21 +79,25 @@ const flightClasses = [
 ]
 
 export default function Hero(){
-    const handleForm = (data : any) => {
-        console.log(data)
+    let [flightType, setFlightType] = useState('round')
+
+    const handleFlightTypeChange = (e : any) => {
+        setFlightType(e.target.value)
+        console.log("Changed val")
     }
+
     return (
-        <div className='bg-hero bg-no-repeat bg-cover text-neutral-900 h-96'>
+        <div className='bg-hero bg-no-repeat bg-cover text-neutral-900'>
             <div className="flex flex-col max-w-screen-xl mx-auto p-4 gap-4">
                 <div className="text-2xl font-bold text-white ">
                     Countless Flights. Once Search.
                 </div>
                 <form action="/search" method='GET' className="flex flex-col md:flex-row mx-auto w-full bg-white p-4 rounded-md gap-2">
-                    <div className='flex flex-col w-full md:w-1/2'>
+                    <div className='flex flex-col w-full md:w-1/2 gap-2'>
                         <div className='flex flex-col md:flex-row gap-2'>
                             <div className='flex flex-row gap-2 w-full'>
-                                <FlightSearchDropDown name="type" objects={tripTypes}/>
-                                <FlightSearchDropDown name="travelers" objects={travelerNums}/>
+                                <FlightSearchDropDown name="type" objects={tripTypes} onChange={handleFlightTypeChange}/>
+                                <FlightSearchDropDown name="travelers" objects={travelerNums} onChange={() => {}} />
                             </div>
                             <div className='flex flex-row bg-gray-100 text-nowrap rounded-md h-fit px-2 py-1 gap-2'>
                                 <div className='px-1 font-semibold'>Book with SkyMiles</div>
@@ -103,16 +107,15 @@ export default function Hero(){
                         <ToAndFromSelector></ToAndFromSelector>
                     </div>
                     <div className='flex flex-col mt-auto gap-2 w-full md:w-1/2'>
-                        <div className='flex flex-row border-b-2 border-gray-200 w-full gap-1'>
-                            <div className='flex flex-row gap-2 w-1/2'>
+                        <div className='flex flex-row  w-full gap-1'>
+                            <div className={'flex flex-row gap-2 border-b-2 border-gray-200 ' + (flightType == 'direct' ? 'w-full' : 'w-1/2' )}>
                                 <FaCalendarAlt className='size-5 my-auto text-emerald-900'/>
                                 <input type='text' onFocus={(e) => e.target.type = 'date'} name='depDate' placeholder='Departure Date' className='px-2 py-1 w-full'></input>
                             </div>
-                            <input type='text' onFocus={(e) => e.target.type = 'date'} name='retDate' placeholder='Return Date' className='w-1/2 px-2 py-1'></input>
-
+                            {flightType == 'round' ? <input type='text' onFocus={(e) => e.target.type = 'date'} name='retDate' placeholder='Return Date' className='w-1/2 px-2 py-1 border-b-2 border-gray-200'></input> : null}
                         </div>
-                        <div className='flex flex-col md:flex-row w-full'>
-                            <div className='flex flex-row gap-2 border-b-2 border-gray-200'>
+                        <div className='flex flex-col md:flex-row w-full gap-2'>
+                            <div className='flex flex-row gap-2 border-b-2 border-gray-200 w-full md:w-1/2'>
                                 <MdDiscount className='size-5 my-auto text-emerald-900'/>
                                 <input type='text' name='promo' placeholder='Promo Code' className='w-full px-2 py-1'></input>
                             </div>
@@ -125,9 +128,9 @@ export default function Hero(){
     )
 }
 
-function FlightSearchDropDown({name, objects}:{name : string, objects : any[]}){
+function FlightSearchDropDown({name, objects, onChange}:{name : string, objects : any[], onChange : any}){
     return (
-        <select name={name} className='rounded-md px-2 py-1 font-medium bg-gray-100 h-fit w-1/2 md:w-full'>
+        <select name={name} onChange={onChange} className='rounded-md px-2 py-1 font-medium bg-gray-100 h-fit w-1/2 md:w-full'>
             {objects.map((object, index) => index == 0 ? <option selected value={object.value}>{object.label}</option> : <option value={object.value}>{object.label}</option>)}
         </select>
     )
@@ -146,31 +149,30 @@ function ToAndFromSelector(){
  
     return (
         <div className='flex flex-row w-full'>
-            <div className='flex flex-col w-full border-2 border-gray-200 rounded-md'>
-                <div className='flex flex-row'>
-                    <BiSolidPlaneTakeOff className='size-8 text-emerald-900'/>
-                    <SearchableDropdown name="depLoc" placeholder='Departing From'></SearchableDropdown>
+            <div className='flex flex-col w-full  rounded-md p-1'>
+                <div className='flex flex-row border-b-4 border-emerald-900 py-1'>
+                    <BiSolidPlaneTakeOff className='size-8 text-emerald-900 my-auto'/>
+                    <SearchableDropdown name="depLoc" placeholder='Departing'></SearchableDropdown>
+                </div>
+                <div className='text-xs text-gray-600'>
+                    Select a point of departure for your trip.
                 </div>
             </div>
             <button type='button' className='my-auto'>
                 <RiSwapBoxFill className='size-12 text-emerald-900'/>
             </button>
-            <div className='flex flex-col w-full border-2 border-gray-200 rounded-md'>
-                <div className='flex flex-row'>
-                    <BiSolidPlaneLand className='size-8 text-emerald-900'/>
-                    <SearchableDropdown name="arrLoc" placeholder='Arriving In'></SearchableDropdown>
+            <div className='flex flex-col w-full rounded-md p-1'>
+                <div className='flex flex-row border-b-4 border-emerald-900 py-1'>
+                    <BiSolidPlaneLand className='size-8 text-emerald-900 my-auto'/>
+                    <SearchableDropdown name="arrLoc" placeholder='Arriving'></SearchableDropdown>
+                </div>
+                <div className='text-xs text-gray-600'>
+                    Select a point of arrival for your trip.
                 </div>
             </div>
         </div>
     )
 }
-
-
-const options = [
-    { value: 'balls', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
 
 function SearchableDropdown({name, placeholder} : {name : string, placeholder : string}){
     let [input, setInput] = useState('')
