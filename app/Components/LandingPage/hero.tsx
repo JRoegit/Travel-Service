@@ -95,7 +95,7 @@ export default function Hero(){
                 <form action="/search" method='GET' className="flex flex-col md:flex-row mx-auto w-full bg-white p-4 rounded-md gap-2">
                     <div className='flex flex-col w-full md:w-1/2 gap-2'>
                         <div className='flex flex-col md:flex-row gap-2'>
-                            <div className='flex flex-row gap-2 w-full'>
+                            <div className='flex flex-col md:flex-row gap-2 w-full'>
                                 <FlightSearchDropDown name="type" objects={tripTypes} onChange={handleFlightTypeChange}/>
                                 <FlightSearchDropDown name="travelers" objects={travelerNums} onChange={() => {}} />
                             </div>
@@ -107,7 +107,7 @@ export default function Hero(){
                         <ToAndFromSelector></ToAndFromSelector>
                     </div>
                     <div className='flex flex-col mt-auto gap-2 w-full md:w-1/2'>
-                        <div className='flex flex-row  w-full gap-1'>
+                        <div className='flex flex-row w-full gap-1'>
                             <div className={'flex flex-row gap-2 border-b-2 border-gray-200 ' + (flightType == 'direct' ? 'w-full' : 'w-1/2' )}>
                                 <FaCalendarAlt className='size-5 my-auto text-emerald-900'/>
                                 <input type='text' onFocus={(e) => e.target.type = 'date'} name='depDate' placeholder='Departure Date' className='px-2 py-1 w-full'></input>
@@ -130,7 +130,7 @@ export default function Hero(){
 
 function FlightSearchDropDown({name, objects, onChange}:{name : string, objects : any[], onChange : any}){
     return (
-        <select name={name} onChange={onChange} className='rounded-md px-2 py-1 font-medium bg-gray-100 h-fit w-1/2 md:w-full'>
+        <select name={name} onChange={onChange} className='rounded-md px-2 py-1 font-medium bg-gray-100 h-fit w-full'>
             {objects.map((object, index) => index == 0 ? <option selected value={object.value}>{object.label}</option> : <option value={object.value}>{object.label}</option>)}
         </select>
     )
@@ -176,7 +176,12 @@ function ToAndFromSelector(){
 
 function SearchableDropdown({name, placeholder} : {name : string, placeholder : string}){
     let [input, setInput] = useState('')
-    
+    let [selected, setSelected] = useState('')
+
+    useEffect( ()=> {
+        
+    }, [selected])
+
     let filtered : {}[] = []
     if(input.length >= 2){
         filtered = airportData.filter((airport) => 
@@ -188,6 +193,6 @@ function SearchableDropdown({name, placeholder} : {name : string, placeholder : 
     }
 
     return (
-        <Select options={filtered} name={name} noOptionsMessage={() => "No Results"} onInputChange={(e) => setInput(e)} placeholder={placeholder} className='w-full'></Select>
+        <Select menuPosition='fixed' options={filtered} name={name} noOptionsMessage={() => "No Results"}  onInputChange={(e) => setInput(e)} placeholder={placeholder} className='w-full'></Select>
     )
 }

@@ -2,6 +2,11 @@ import Image from "next/image"
 import CompanyLogoWhite from '/public/planelogowhite.png'
 import Link from "next/link"
 
+import { FaSquareXTwitter } from "react-icons/fa6";
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaSquareInstagram } from "react-icons/fa6";
+
+
 export default function Footer() {
     return(
         <div className="flex flex-col">
@@ -58,12 +63,18 @@ function HomeButton(){
 
 function FooterBottom(){
     return (
-        <div className="my-2 flex flex-col mx-auto text-white max-w-screen-xl text-xs text-gray-300 gap-1">
+        <div className="my-2 flex flex-col mx-auto text-white max-w-screen-xl text-xs gap-1">
             <div className=" mx-auto">©2024 Flightify</div>
-            <div className="mx-auto flex flex-row gap-8">
-                <div>LOGO 1</div>
-                <div>LOGO 2</div>
-                <div>LOGO 3</div>
+            <div className="mx-auto flex flex-row gap-2">
+                <a href="https://www.twitter.com">
+                    <FaSquareXTwitter className="size-6"/>
+                </a>
+                <a href="https://www.facebook.com">
+                    <FaFacebookSquare className="size-6"/>
+                </a>
+                <a href="https://www.instagram.com/">
+                    <FaSquareInstagram className="size-6"/>
+                </a>
             </div>
             <div className="mx-auto">Terms of use | Privacy Policy | General Conditions of Carriage & Tariffs | Cookies Policy</div>
         </div>

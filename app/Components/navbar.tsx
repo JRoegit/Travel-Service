@@ -3,17 +3,21 @@ import ReactCountryFlag from "react-country-flag"
 import Image from 'next/image'
 import CompanyLogoColored from '/public/planelogo.png'
 import JoinSkyMilesButton from "./joinSkyMilesButton"
+import NavBarPopUp from "./navbarPopup"
 
 export default function NavBar() {
     return (
         <div className="drop-shadow-md bg-white border-b border-gray-300 px-4">
-            <div className="mx-auto h-[75px] max-w-screen-xl flex gap-4">
+            <div className="mx-auto h-[75px] max-w-screen-xl flex flex-row gap-4">
                 <HomeButton></HomeButton>
-                <RegionSelectButton></RegionSelectButton>
-                <NavLinkButton LinkPath="/support" LinkTitle="Support"></NavLinkButton>
-                <NavLinkButton LinkPath="/trips" LinkTitle="Trips"></NavLinkButton>
-                <NavLinkButton LinkPath="/login" LinkTitle="Login"></NavLinkButton>
-                <JoinSkyMilesButton></JoinSkyMilesButton>
+                <div className="hidden md:flex gap-4">
+                    <RegionSelectButton></RegionSelectButton>
+                    <NavLinkButton LinkPath="/support" LinkTitle="Support"></NavLinkButton>
+                    <NavLinkButton LinkPath="/trips" LinkTitle="Trips"></NavLinkButton>
+                    <NavLinkButton LinkPath="/login" LinkTitle="Login"></NavLinkButton>
+                    <JoinSkyMilesButton></JoinSkyMilesButton>
+                </div>
+                <NavBarPopUp/>
             </div>
         </div>
     )

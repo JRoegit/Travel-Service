@@ -9,9 +9,9 @@ export default function Home() {
   return (
     <>
       <Hero></Hero>
-      <KeyFeatures></KeyFeatures>
-      <BookingGuide></BookingGuide>
       <MustVisit></MustVisit>
+      <BookingGuide></BookingGuide>
+      <KeyFeatures></KeyFeatures>
       <UserReviews></UserReviews>
       <LoyaltyPromo></LoyaltyPromo>
     </>

@@ -53,7 +53,7 @@ const features = [
 
 export default function KeyFeatures(){
     return (
-        <div className='bg-gray-100 text-neutral-900'>
+        <div className=' text-neutral-900'>
             <div className="flex flex-col max-w-screen-xl mx-auto p-4 gap-4">
                 <div className="text-2xl font-bold ">
                     Why Choose Flightify?
